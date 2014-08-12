@@ -13,4 +13,11 @@ ADD . /src
 EXPOSE  8080
 
 # Run
-CMD ["python", "/src/app.py"]
+CMD [ \
+    "/usr/local/bin/uwsgi", \
+    "--http=:8080", \
+    "--wsgi-file=./src/app.py", \
+    "--callable=app", \
+    "--gevent=100", \
+    "--die-on-term" \
+]
