@@ -8,16 +8,10 @@ RUN pip install -r requirements.txt
 
 # Bundle app source
 ADD . /src
+RUN chmod +x /src/start_uwsgi.sh
 
 # Expose
 EXPOSE  8080
 
 # Run
-CMD [ \
-    "/usr/local/bin/uwsgi", \
-    "--http=:8080", \
-    "--wsgi-file=./src/app.py", \
-    "--callable=app", \
-    "--gevent=100", \
-    "--die-on-term" \
-]
+CMD ["/src/start_uwsgi.sh"]
